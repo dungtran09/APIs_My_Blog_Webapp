@@ -1,0 +1,9 @@
+{
+  "title": "title 1",
+  "content": "content post 1",
+  "categories": [
+    {
+      "id": 1
+    }
+  ]
+}
