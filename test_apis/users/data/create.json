@@ -1,10 +1,6 @@
 {
-  "email": "ngaynangnhe2@gmail.com",
   "name": "Dung Tran",
+  "email": "ngaynangnhe4@gmail.com",
   "password": "123456789",
-  "address": {
-    "street": "Vinh Son, Vinh Linh",
-    "city": "Ho Xa",
-    "country": "Viet Nam"
-  }
+  "gender": "famale"
 }
