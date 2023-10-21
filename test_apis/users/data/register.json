@@ -1,11 +1,11 @@
 {
-  "name": "adm1",
-  "email": "adm1@gmail.com",
+  "name": "adm2",
+  "email": "adm2@gmail.com",
   "password": "123456789",
   "gender": "female",
   "address": {
-    "street": "12, Nguyen Tat A",
-    "city": "Da Nang",
+    "street": "12, Nguyen Van B",
+    "city": "Quang Tri",
     "country": "Viet Nam"
   }
 }

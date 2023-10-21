@@ -1,9 +1,16 @@
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
 import { databaseConfig } from './database.config';
-import { User } from 'src/modules/users/entities';
-import { Post } from 'src/modules/posts/entities';
+import { Address, User } from 'src/modules/users/entities';
+import {
+  Post,
+  PostComment,
+  PostMeta,
+  PostTag,
+  PostTopic,
+} from 'src/modules/posts/entities';
 import Topic from 'src/modules/topics/entities/topic.entity';
+import { Tag } from 'src/modules/tags/tag.entities';
 export const databaseProviders = [
   {
     provide: SEQUELIZE,
@@ -24,7 +31,17 @@ export const databaseProviders = [
       }
 
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Post, Topic]);
+      sequelize.addModels([
+        User,
+        Post,
+        Topic,
+        Address,
+        PostComment,
+        PostMeta,
+        PostTag,
+        PostTopic,
+        Tag,
+      ]);
       await sequelize.sync();
       sequelize
         .authenticate()

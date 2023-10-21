@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { User } from '../entities';
 import { UserDto } from '../dtos';
 import UserNotFoundException from '../exceptions/user.exception';
@@ -17,11 +17,20 @@ export default class UsersService {
   }
 
   async getAllUsers(): Promise<User[]> {
-    return this.userRepository.findAll<User>();
+    return this.userRepository.findAll<User>({
+      attributes: {
+        exclude: ['password'],
+      },
+    });
   }
 
   async getUserById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne<User>({ where: { id } });
+    const user = await this.userRepository.findOne<User>({
+      where: { id },
+      attributes: {
+        exclude: ['password'],
+      },
+    });
     if (user) {
       return user;
     }

@@ -4,6 +4,7 @@ import { Post } from '../entities';
 import { PostDto } from '../dtos';
 import { PostNotFoundException } from '../exceptions';
 import { User } from 'src/modules/users/entities';
+import { Topic } from 'src/modules/topics/entities';
 
 @Injectable()
 export class PostsService {
@@ -22,10 +23,23 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: ['password'],
+            exclude: [
+              'id',
+              'email',
+              'gender',
+              'password',
+              'createdAt',
+              'updatedAt',
+            ],
           },
         },
+        {
+          model: Topic,
+        },
       ],
+      attributes: {
+        exclude: ['userId'],
+      },
     });
   }
 
@@ -36,10 +50,23 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: ['password'],
+            exclude: [
+              'id',
+              'email',
+              'gender',
+              'password',
+              'createdAt',
+              'updatedAt',
+            ],
           },
         },
+        {
+          model: Topic,
+        },
       ],
+      attributes: {
+        exclude: ['userId'],
+      },
     });
 
     if (post) {

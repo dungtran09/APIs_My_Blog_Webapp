@@ -3,6 +3,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -31,14 +32,21 @@ class Post extends Model<Post> {
   userId: number;
 
   @BelongsTo(() => User)
-  user: User;
+  createdBy: User;
 
   @ForeignKey(() => Topic)
-  @Column
-  topicId: number;
+  @Column({
+    type: DataType.JSONB,
+    allowNull: false,
+  })
+  topicIds: Topic[];
 
-  @BelongsTo(() => Topic)
-  topic: Topic[];
+  @ForeignKey(() => User)
+  @Column
+  authorId: string;
+
+  @HasMany(() => Topic)
+  topics: Topic[];
 }
 
 export default Post;

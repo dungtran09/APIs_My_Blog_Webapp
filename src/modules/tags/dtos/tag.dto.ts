@@ -1,19 +1,14 @@
 import { IsNotEmpty, MinLength } from 'class-validator';
 
-export class TopicDto {
+export class TagDto {
   @IsNotEmpty()
   @MinLength(4)
   readonly title: string;
 
   @IsNotEmpty()
-  @MinLength(5)
-  readonly metaTile: string;
-
-  @IsNotEmpty()
-  @MinLength(4)
+  readonly metaTitle: string | null;
   readonly slug: string;
 
   @IsNotEmpty()
-  @MinLength(4)
-  readonly content: string;
+  readonly content: string | null;
 }

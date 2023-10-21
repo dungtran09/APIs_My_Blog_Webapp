@@ -1,13 +1,10 @@
 {
   "title": "title 1",
-  "body": "body post 2",
+  "body": "body post 1",
   "userId": 1,
-  "topics": [
+  "topicIds": [
     {
-      "id": 1
-    },
-    {
-      "id": 3
+      "id": 4
     }
   ]
 }

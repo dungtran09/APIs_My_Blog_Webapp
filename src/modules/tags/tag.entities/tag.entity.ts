@@ -1,16 +1,9 @@
-import {
-  Column,
-  DataType,
-  ForeignKey,
-  Model,
-  Table,
-} from 'sequelize-typescript';
-import { Post } from 'src/modules/posts/entities';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table
-class Topic extends Model<Topic> {
+export class Tag extends Model<Tag> {
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(75),
     allowNull: false,
   })
   title: string;
@@ -31,10 +24,4 @@ class Topic extends Model<Topic> {
     type: DataType.TEXT,
   })
   content: string;
-
-  @ForeignKey(() => Post)
-  @Column
-  postId: number;
 }
-
-export default Topic;

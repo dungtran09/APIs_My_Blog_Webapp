@@ -39,6 +39,7 @@ export class AuthService {
   }
 
   public async register(registrationData: UserDto) {
+    console.log(registrationData);
     const hashedPassword = await this.hashPassword(registrationData.password);
     try {
       const createdUser = await this.userService.createUser({
