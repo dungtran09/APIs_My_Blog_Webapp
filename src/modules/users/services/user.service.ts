@@ -16,6 +16,10 @@ export default class UsersService {
     return newUser;
   }
 
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepository.findAll<User>();
+  }
+
   async getUserById(id: number): Promise<User> {
     const user = await this.userRepository.findOne<User>({ where: { id } });
     if (user) {

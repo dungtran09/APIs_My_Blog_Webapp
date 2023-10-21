@@ -1,1 +1,1 @@
-{"id":3,"title":"title 1","body":"body post 2","userId":1,"topics":[{"id":1},{"id":3}],"updatedAt":"2023-10-20T21:58:12.255Z","createdAt":"2023-10-20T21:58:12.255Z"}
+{"statusCode":500,"message":"Internal server error"}

@@ -1,4 +1,5 @@
 curl \
 -X GET \
--H "Content-Type: application/json" "$(cat ../config/URL.txt)/users" \
+-b "$(cat ../config/COOKIE.txt)" \
+-H "Content-Type: application/json" "$(cat ../config/URL.txt)/api/v1/users" \
 -o ./data/log.json && cat ./data/log.json | jq
