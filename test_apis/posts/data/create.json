@@ -1,9 +1,13 @@
 {
   "title": "title 1",
-  "content": "content post 1",
-  "categories": [
+  "body": "body post 2",
+  "userId": 1,
+  "topics": [
     {
       "id": 1
+    },
+    {
+      "id": 3
     }
   ]
 }

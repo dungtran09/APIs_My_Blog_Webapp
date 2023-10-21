@@ -1,7 +1,16 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import Address from './address.entity';
+import { Post } from 'src/modules/posts/entities';
 
 @Table
-export class User extends Model<User> {
+class User extends Model<User> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -27,6 +36,13 @@ export class User extends Model<User> {
     allowNull: false,
   })
   gender: string;
+
+  @ForeignKey(() => Address)
+  @Column({ type: DataType.VIRTUAL })
+  address: Address;
+
+  @HasMany(() => Post)
+  posts: Post[];
 }
 
 export default User;

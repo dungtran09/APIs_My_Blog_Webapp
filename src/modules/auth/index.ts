@@ -1,2 +1,3 @@
-import { AuthController } from './controllers';
-export { AuthController };
+import { AuthModule } from './auth.module';
+
+export { AuthModule };

@@ -1,26 +1,35 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt } from 'passport-jwt';
-import { Strategy } from 'passport-local';
+
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
+import { Request } from 'express';
 import { UsersService } from 'src/modules/users/services';
+import { User } from 'src/modules/users/entities';
+import { TokenPlayload } from '../interfaces';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly userService: UsersService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly userService: UsersService,
+  ) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      scretOrKey: process.env.JWTKEY,
+      // Extract the JSON web token from the request cookies if it exists
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) => {
+          // console.log(request.cookies);
+          return request?.cookies?.Authentication;
+        },
+      ]),
+      secretOrKey: configService.get('JWT_KEY'),
     });
   }
 
-  async validate(payload: any) {
-    const user = await this.userService.getUserById(payload.id);
-    if (!user) {
-      throw new UnauthorizedException(
-        'You are not authorized to perfom the operation',
-      );
-    }
-    return payload;
+  async validate(payload: TokenPlayload): Promise<User> {
+    // Because the payload contains the email and username, we could also use
+    // those credentials to get a use from the database
+    return this.userService.getUserById(payload.userId);
   }
 }

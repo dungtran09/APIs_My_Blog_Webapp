@@ -3,3 +3,5 @@ export const DEVELOPMENT = 'DEVELOPMENT';
 export const TEST = 'TEST';
 export const PRODUCTION = 'PRODUCTION';
 export const USER_REPOSITORY = 'USER_REPOSITORY';
+export const POST_REPOSITORY = 'POST_REPOSITORY';
+export const TOPIC_REPOSITORY = 'TOPIC_REPOSITORY';

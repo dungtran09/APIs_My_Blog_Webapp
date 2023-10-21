@@ -12,12 +12,12 @@ export default class UsersService {
   ) {}
 
   async createUser(userData: UserDto): Promise<User> {
-    return this.userRepository.create<User>(userData);
+    const newUser = await this.userRepository.create<User>(userData);
+    return newUser;
   }
 
   async getUserById(id: number): Promise<User> {
     const user = await this.userRepository.findOne<User>({ where: { id } });
-
     if (user) {
       return user;
     }
@@ -26,13 +26,9 @@ export default class UsersService {
 
   async getUserByEmail(email: string): Promise<User> {
     const user = await this.userRepository.findOne<User>({ where: { email } });
-
     if (user) {
       return user;
     }
-    throw new HttpException(
-      `User width ${email} not found`,
-      HttpStatus.NOT_FOUND,
-    );
+    return null;
   }
 }

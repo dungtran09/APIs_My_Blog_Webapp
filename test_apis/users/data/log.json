@@ -1,1 +1,1 @@
-{"message":"This email already exits","error":"Forbidden","statusCode":403}
+{"id":1,"name":"Thuy Tien","email":"tienthuy@gmail.com","gender":"female","createdAt":"2023-10-20T19:58:55.741Z","updatedAt":"2023-10-20T19:58:55.741Z"}

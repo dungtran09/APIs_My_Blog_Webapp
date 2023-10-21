@@ -1,3 +1,4 @@
+import Address from './address.entity';
 import User from './user.entity';
 
-export { User };
+export { User, Address };

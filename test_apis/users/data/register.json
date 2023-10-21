@@ -1,0 +1,11 @@
+{
+  "name": "Thuy Tien",
+  "email": "tienthuy@gmail.com",
+  "password": "123456789",
+  "gender": "female",
+  "address": {
+    "street": "12, Nguyen Tat A",
+    "city": "Da Nang",
+    "country": "Viet Nam"
+  }
+}
