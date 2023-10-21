@@ -1,6 +1,6 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'post_comments' })
 class PostComment extends Model<PostComment> {
   @Column({
     type: DataType.STRING(75),
@@ -23,5 +23,15 @@ class PostComment extends Model<PostComment> {
     type: DataType.TEXT,
   })
   content: string;
+
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  post_id: number;
+
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  parent_id: number;
 }
 export default PostComment;

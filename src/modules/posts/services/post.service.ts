@@ -4,7 +4,6 @@ import { Post } from '../entities';
 import { PostDto } from '../dtos';
 import { PostNotFoundException } from '../exceptions';
 import { User } from 'src/modules/users/entities';
-import { Topic } from 'src/modules/topics/entities';
 
 @Injectable()
 export class PostsService {
@@ -13,8 +12,8 @@ export class PostsService {
     private readonly postRepository: typeof Post,
   ) {}
 
-  async createPost(post: PostDto, userId: number): Promise<Post> {
-    return await this.postRepository.create<Post>({ ...post, userId });
+  async createPost(post: PostDto): Promise<Post> {
+    return await this.postRepository.create<Post>({ ...post });
   }
 
   async getAllPosts(): Promise<Post[]> {
@@ -33,13 +32,7 @@ export class PostsService {
             ],
           },
         },
-        {
-          model: Topic,
-        },
       ],
-      attributes: {
-        exclude: ['userId'],
-      },
     });
   }
 
@@ -60,13 +53,7 @@ export class PostsService {
             ],
           },
         },
-        {
-          model: Topic,
-        },
       ],
-      attributes: {
-        exclude: ['userId'],
-      },
     });
 
     if (post) {
@@ -79,14 +66,13 @@ export class PostsService {
   //   return this.postRepository.destroy({ where: { id: postId, userId } });
   // }
 
-  async updatePost(postId: number, data: object, userId: number) {
+  async updatePost(postId: number, data: object) {
     const [numberOfAffectedRows, updatedPost] =
       await this.postRepository.update(
         { ...data },
         {
           where: {
             id: postId,
-            userId,
           },
           returning: true,
         },

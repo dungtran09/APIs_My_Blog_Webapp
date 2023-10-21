@@ -1,6 +1,6 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'post_tags' })
 class PostTag extends Model<PostTag> {
   @Column({
     type: DataType.INTEGER.UNSIGNED,
@@ -9,6 +9,16 @@ class PostTag extends Model<PostTag> {
     allowNull: false,
   })
   id: number;
+
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  post_id: number;
+
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  tag_id: number;
 }
 
 export default PostTag;

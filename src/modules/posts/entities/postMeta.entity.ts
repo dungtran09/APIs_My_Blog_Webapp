@@ -1,6 +1,6 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'post_metas' })
 class PostMeta extends Model<PostMeta> {
   @Column({
     type: DataType.STRING(50),
@@ -13,6 +13,11 @@ class PostMeta extends Model<PostMeta> {
     type: DataType.TEXT,
   })
   content: string;
+
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  post_id: number;
 }
 
 export default PostMeta;

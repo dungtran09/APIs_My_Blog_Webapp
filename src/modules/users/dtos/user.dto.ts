@@ -7,31 +7,30 @@ enum Gender {
 
 class UserDto {
   @IsNotEmpty()
-  readonly firstName: string;
+  readonly first_name: string;
 
   @IsNotEmpty()
-  readonly lastName: string | null;
+  readonly middle_name: string;
 
   @IsNotEmpty()
-  readonly middleName: string | null;
-
-  readonly mobile: string | null;
+  readonly last_name: string;
 
   @IsNotEmpty()
   @IsNotEmpty()
-  readonly email: string | null;
+  readonly email: string;
 
-  readonly registeredAt: Date;
+  @IsNotEmpty()
+  readonly mobile: string;
 
-  readonly lastLogin: Date | null;
+  @IsNotEmpty()
+  readonly intro: string;
 
-  readonly intro: string | null;
-
-  readonly profile: string | null;
+  @IsNotEmpty()
+  readonly profile: string;
 
   @IsNotEmpty()
   @MinLength(8)
-  readonly password: string | null;
+  readonly password: string;
 
   @IsNotEmpty()
   @IsEnum(Gender, { message: 'Gender must be either Male or Female' })

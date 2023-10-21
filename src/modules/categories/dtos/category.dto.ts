@@ -1,13 +1,13 @@
 import { IsNotEmpty, MinLength } from 'class-validator';
 
-export class TopicDto {
+export class CategoryDto {
   @IsNotEmpty()
   @MinLength(4)
   readonly title: string;
 
   @IsNotEmpty()
   @MinLength(5)
-  readonly metaTile: string;
+  readonly meta_title: string;
 
   @IsNotEmpty()
   @MinLength(4)

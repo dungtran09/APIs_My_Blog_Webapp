@@ -39,8 +39,8 @@ export class AuthService {
   }
 
   public async register(registrationData: UserDto) {
-    console.log(registrationData);
     const hashedPassword = await this.hashPassword(registrationData.password);
+    console.log(hashedPassword);
     try {
       const createdUser = await this.userService.createUser({
         ...registrationData,
@@ -49,6 +49,7 @@ export class AuthService {
       createdUser.password = undefined;
       return createdUser;
     } catch (error) {
+      console.log(error);
       if (error?.code === PostgresErrorCode.UniqueViolation) {
         throw new HttpException(
           'User with that email already exists',

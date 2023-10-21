@@ -1,16 +1,6 @@
-import {
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  HasMany,
-  Model,
-  Table,
-} from 'sequelize-typescript';
-import Topic from 'src/modules/topics/entities/topic.entity';
-import { User } from 'src/modules/users/entities';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'posts' })
 class Post extends Model<Post> {
   @Column({
     type: DataType.STRING,
@@ -19,34 +9,50 @@ class Post extends Model<Post> {
   title: string;
 
   @Column({
+    type: DataType.STRING(100),
+    allowNull: false,
+  })
+  meta_title: string;
+
+  @Column({
+    type: DataType.STRING(100),
+    allowNull: false,
+    unique: true,
+  })
+  slug: string;
+
+  @Column({
     type: DataType.TEXT,
     allowNull: false,
   })
-  body: string;
+  sumary: string;
 
-  @ForeignKey(() => User)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.BOOLEAN,
     allowNull: false,
   })
-  userId: number;
+  published: boolean;
 
-  @BelongsTo(() => User)
-  createdBy: User;
-
-  @ForeignKey(() => Topic)
   @Column({
-    type: DataType.JSONB,
+    type: DataType.DATE,
+  })
+  published_at: Date;
+
+  @Column({
+    type: DataType.TEXT,
     allowNull: false,
   })
-  topicIds: Topic[];
+  content: string;
 
-  @ForeignKey(() => User)
-  @Column
-  authorId: string;
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  author_id: number;
 
-  @HasMany(() => Topic)
-  topics: Topic[];
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  parent_id: number;
 }
 
 export default Post;

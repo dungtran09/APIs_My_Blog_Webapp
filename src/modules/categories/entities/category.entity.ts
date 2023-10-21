@@ -1,14 +1,14 @@
 import {
+  BelongsTo,
   Column,
   DataType,
-  ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Post } from 'src/modules/posts/entities';
 
-@Table
-class Topic extends Model<Topic> {
+@Table({ tableName: 'categories' })
+class Category extends Model<Category> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -18,7 +18,7 @@ class Topic extends Model<Topic> {
   @Column({
     type: DataType.STRING(100),
   })
-  metaTitle: string;
+  meta_title: string;
 
   @Column({
     type: DataType.STRING(100),
@@ -32,9 +32,16 @@ class Topic extends Model<Topic> {
   })
   content: string;
 
-  @ForeignKey(() => Post)
-  @Column
-  postId: number;
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+  })
+  parent_id: number;
+
+  @BelongsTo(() => Category, { foreignKey: 'parent_id' })
+  parent: Category;
+
+  @HasMany(() => Category, { foreignKey: 'parent_id' })
+  child: Category;
 }
 
-export default Topic;
+export default Category;

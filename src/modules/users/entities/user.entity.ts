@@ -1,34 +1,25 @@
-import {
-  Column,
-  DataType,
-  ForeignKey,
-  HasMany,
-  Model,
-  Table,
-} from 'sequelize-typescript';
-import Address from './address.entity';
-import { Post } from 'src/modules/posts/entities';
+import { Column, DataType, Default, Model, Table } from 'sequelize-typescript';
 import { Exclude } from 'class-transformer';
 
-@Table
+@Table({ tableName: 'users' })
 class User extends Model<User> {
   @Column({
     type: DataType.STRING(50),
     allowNull: false,
   })
-  firstName: string;
+  first_name: string;
 
   @Column({
     type: DataType.STRING(50),
     allowNull: true,
   })
-  middleName: string | null;
+  middle_name: string | null;
 
   @Column({
     type: DataType.STRING(50),
     allowNull: false,
   })
-  lastName: string;
+  last_name: string;
 
   @Column({
     type: DataType.STRING(15),
@@ -46,15 +37,9 @@ class User extends Model<User> {
 
   @Column({
     type: DataType.DATE,
-    allowNull: false,
-  })
-  registeredAt: Date;
-
-  @Column({
-    type: DataType.DATE,
     allowNull: true,
   })
-  lastLogin: Date | null;
+  last_login: Date | null;
 
   @Column({
     type: DataType.TEXT,
@@ -70,10 +55,17 @@ class User extends Model<User> {
 
   @Exclude()
   @Column({
-    type: DataType.STRING(32),
+    type: DataType.STRING(225),
     allowNull: false,
   })
   password: string;
+
+  @Default(Date.now())
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
+  registered_at: Date;
 
   @Column({
     type: DataType.STRING,

@@ -36,7 +36,7 @@ export class PostsController {
     @Body() post: PostDto,
     @Request() req: ReqWidthUser,
   ): Promise<PostEntity> {
-    return await this.postService.createPost(post, req.user.id);
+    return await this.postService.createPost(post);
   }
 
   @Patch(':id')
@@ -46,6 +46,6 @@ export class PostsController {
     @Body() post: PostDto,
     @Request() req: ReqWidthUser,
   ): Promise<PostEntity[]> {
-    return await this.postService.updatePost(id, post, req.user.id);
+    return await this.postService.updatePost(id, post);
   }
 }

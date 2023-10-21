@@ -7,13 +7,13 @@ import { UsersModule } from './modules/users';
 import { DatabaseModule } from './core/database';
 import { AuthModule } from './modules/auth';
 import { ExceptionsLongerFilter } from './core/utils/exceptions';
-import { TopicsModule } from './modules/topics';
+import { CategoriesModule } from './modules/categories';
 
 @Module({
   imports: [
     PostsModule,
     UsersModule,
-    TopicsModule,
+    CategoriesModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DB_HOST: Joi.string().required(),

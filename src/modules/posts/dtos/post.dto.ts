@@ -6,5 +6,5 @@ export class PostDto {
   readonly title: string;
 
   @IsNotEmpty()
-  readonly body: string;
+  readonly content: string;
 }
