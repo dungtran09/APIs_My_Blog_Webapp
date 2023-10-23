@@ -4,12 +4,14 @@ import {
   DataType,
   Default,
   HasMany,
+  HasOne,
   Model,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
 import { Exclude } from 'class-transformer';
 import { Post } from 'src/modules/posts/entities';
+import Address from './address.entity';
 
 @Table({ tableName: 'users' })
 class User extends Model<User> {
@@ -83,6 +85,9 @@ class User extends Model<User> {
     allowNull: false,
   })
   gender: string;
+
+  @HasOne(() => Address)
+  address: Address;
 
   @HasMany(() => Post, 'author_id')
   posts: Post[];

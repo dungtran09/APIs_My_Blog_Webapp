@@ -4,6 +4,7 @@ import {
   Column,
   CreatedAt,
   DataType,
+  ForeignKey,
   HasMany,
   Model,
   Table,
@@ -61,6 +62,7 @@ class Post extends Model<Post> {
   })
   content: string;
 
+  @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER.UNSIGNED,
   })

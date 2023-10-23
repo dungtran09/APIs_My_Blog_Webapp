@@ -9,7 +9,7 @@ import {
   PostTag,
 } from 'src/modules/posts/entities';
 import { Tag } from 'src/modules/tags/tag.entities';
-import { User } from 'src/modules/users/entities';
+import { Address, User } from 'src/modules/users/entities';
 import { Category } from 'src/modules/categories/entities';
 export const databaseProviders = [
   {
@@ -40,6 +40,7 @@ export const databaseProviders = [
         PostTag,
         PostCategory,
         Tag,
+        Address,
       ]);
       await sequelize.sync();
       sequelize
