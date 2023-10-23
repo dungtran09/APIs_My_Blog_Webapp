@@ -4,6 +4,7 @@ import {
   Column,
   CreatedAt,
   DataType,
+  Default,
   ForeignKey,
   HasMany,
   Model,
@@ -16,7 +17,7 @@ import { Category } from 'src/modules/categories/entities';
 import PostComment from './postComent.entity';
 import PostMeta from './postMeta.entity';
 import PostTag from './postTag.entity';
-import { Tag } from 'src/modules/tags/tag.entities';
+import { Tag } from 'src/modules/tags/entities';
 
 @Table({ tableName: 'posts' })
 class Post extends Model<Post> {
@@ -46,21 +47,22 @@ class Post extends Model<Post> {
   sumary: string;
 
   @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
+  content: string;
+
+  @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
   })
   published: boolean;
 
+  @Default(Date.now())
   @Column({
     type: DataType.DATE,
   })
   published_at: Date;
-
-  @Column({
-    type: DataType.TEXT,
-    allowNull: false,
-  })
-  content: string;
 
   @ForeignKey(() => User)
   @Column({
@@ -99,10 +101,12 @@ class Post extends Model<Post> {
   })
   tags: Tag[];
 
+  @Default(Date.now())
   @CreatedAt
   @Column(DataType.DATE)
   created_at: Date;
 
+  @Default(Date.now())
   @UpdatedAt
   @Column(DataType.DATE)
   updated_at: Date;

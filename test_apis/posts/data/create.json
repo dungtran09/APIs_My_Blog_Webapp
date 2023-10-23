@@ -1,10 +1,8 @@
 {
-  "title": "title 1",
-  "body": "body post 1",
-  "userId": 1,
-  "topicIds": [
-    {
-      "id": 4
-    }
-  ]
+  "title": "title 2",
+  "meta_title": "meta title 2",
+  "slug": "slug 2",
+  "sumary": "sumary 2",
+  "content": "content 2",
+  "published": true
 }

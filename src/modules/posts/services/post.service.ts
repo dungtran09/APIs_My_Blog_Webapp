@@ -12,8 +12,8 @@ export class PostsService {
     private readonly postRepository: typeof Post,
   ) {}
 
-  async createPost(post: PostDto): Promise<Post> {
-    return await this.postRepository.create<Post>({ ...post });
+  async createPost(post: PostDto, author_id: number): Promise<Post> {
+    return await this.postRepository.create<Post>({ ...post, author_id });
   }
 
   async getAllPosts(): Promise<Post[]> {
@@ -22,17 +22,11 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: [
-              'id',
-              'email',
-              'gender',
-              'password',
-              'createdAt',
-              'updatedAt',
-            ],
+            exclude: ['password'],
           },
         },
       ],
+      attributes: { exclude: ['author_id'] },
     });
   }
 
@@ -43,17 +37,11 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: [
-              'id',
-              'email',
-              'gender',
-              'password',
-              'createdAt',
-              'updatedAt',
-            ],
+            exclude: ['password'],
           },
         },
       ],
+      attributes: { exclude: ['author_id'] },
     });
 
     if (post) {

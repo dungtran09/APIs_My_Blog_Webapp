@@ -8,9 +8,9 @@ import {
   PostMeta,
   PostTag,
 } from 'src/modules/posts/entities';
-import { Tag } from 'src/modules/tags/tag.entities';
 import { Address, User } from 'src/modules/users/entities';
 import { Category } from 'src/modules/categories/entities';
+import { Tag } from 'src/modules/tags/entities';
 export const databaseProviders = [
   {
     provide: SEQUELIZE,

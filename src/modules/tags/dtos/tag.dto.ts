@@ -1,4 +1,4 @@
-import { IsNotEmpty, MinLength } from 'class-validator';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class TagDto {
   @IsNotEmpty()
@@ -6,9 +6,12 @@ export class TagDto {
   readonly title: string;
 
   @IsNotEmpty()
-  readonly metaTitle: string | null;
+  @MaxLength(50)
+  readonly meta_title: string;
+
+  @IsNotEmpty()
   readonly slug: string;
 
   @IsNotEmpty()
-  readonly content: string | null;
+  readonly content: string;
 }

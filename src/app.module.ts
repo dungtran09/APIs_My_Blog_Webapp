@@ -8,12 +8,14 @@ import { DatabaseModule } from './core/database';
 import { AuthModule } from './modules/auth';
 import { ExceptionsLongerFilter } from './core/utils/exceptions';
 import { CategoriesModule } from './modules/categories';
+import { TagModule } from './modules/tags';
 
 @Module({
   imports: [
     PostsModule,
     UsersModule,
     CategoriesModule,
+    TagModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DB_HOST: Joi.string().required(),

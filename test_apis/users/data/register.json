@@ -2,10 +2,15 @@
   "first_name": "Dung",
   "middle_name": "Xuan",
   "last_name": "Tran",
-  "email": "dung@gmail.com",
-  "mobile": "0984651224",
+  "email": "dung1@gmail.com",
+  "mobile": "09846512244",
   "intro": "...",
   "profile": "image.png",
   "password": "123456789",
-  "gender": "female"
+  "gender": "female",
+  "address": {
+    "street": "75, Hai Vo",
+    "city": "Dong Ha",
+    "country": "Quang tri"
+  }
 }

@@ -44,8 +44,8 @@ export class CategoriesController {
     return await this.categoryService.updateCategory(id, category);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async removeCategory(@Param('id') id: number) {
     return await this.categoryService.removeCategory(id);
   }

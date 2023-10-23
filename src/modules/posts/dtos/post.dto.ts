@@ -1,10 +1,21 @@
-import { IsNotEmpty, MinLength } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class PostDto {
   @IsNotEmpty()
-  @MinLength(4)
   readonly title: string;
 
   @IsNotEmpty()
+  readonly meta_title: string;
+
+  @IsNotEmpty()
+  readonly slug: string;
+
+  @IsNotEmpty()
+  readonly sumary: string;
+
+  @IsNotEmpty()
   readonly content: string;
+
+  @IsNotEmpty()
+  readonly published: boolean;
 }

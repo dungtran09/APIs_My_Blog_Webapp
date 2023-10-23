@@ -9,7 +9,7 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import Post from './post.entity';
-import { Tag } from 'src/modules/tags/tag.entities';
+import { Tag } from 'src/modules/tags/entities';
 
 @Table({ tableName: 'post_tags' })
 class PostTag extends Model<PostTag> {

@@ -37,13 +37,13 @@ export class CategoriesService {
     if (deleted === 0) {
       throw new CategoryNotFoundException(categoryId);
     }
-    return 'Successfully deleted';
+    return deleted;
   }
 
-  async updateCategory(categoryId: number, data: any) {
+  async updateCategory(categoryId: number, category: CategoryDto) {
     const [numberOfAffectedRows, updatedCategory] =
       await this.categoryRepository.update(
-        { ...data },
+        { ...category },
         {
           where: {
             id: categoryId,
