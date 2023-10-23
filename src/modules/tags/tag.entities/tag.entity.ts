@@ -1,5 +1,4 @@
 import {
-  BelongsTo,
   BelongsToMany,
   Column,
   CreatedAt,
@@ -22,7 +21,7 @@ export class Tag extends Model<Tag> {
   @Column({
     type: DataType.STRING(100),
   })
-  metaTitle: string;
+  meta_title: string;
 
   @Column({
     type: DataType.STRING(100),

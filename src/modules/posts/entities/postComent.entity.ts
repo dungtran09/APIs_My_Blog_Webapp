@@ -4,7 +4,6 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
-  HasMany,
   Model,
   Table,
   UpdatedAt,
@@ -28,7 +27,7 @@ class PostComment extends Model<PostComment> {
   @Column({
     type: DataType.DATE,
   })
-  publishedAt: Date;
+  published_at: Date;
 
   @Column({
     type: DataType.TEXT,

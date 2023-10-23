@@ -23,7 +23,7 @@ class User extends Model<User> {
     type: DataType.STRING(50),
     allowNull: true,
   })
-  middle_name: string | null;
+  middle_name: string;
 
   @Column({
     type: DataType.STRING(50),
@@ -36,7 +36,7 @@ class User extends Model<User> {
     unique: true,
     allowNull: true,
   })
-  mobile: string | null;
+  mobile: string;
 
   @Column({
     type: DataType.STRING(50),
@@ -49,19 +49,19 @@ class User extends Model<User> {
     type: DataType.DATE,
     allowNull: true,
   })
-  last_login: Date | null;
+  last_login: Date;
 
   @Column({
     type: DataType.TEXT,
     allowNull: true,
   })
-  intro: string | null;
+  intro: string;
 
   @Column({
     type: DataType.TEXT,
     allowNull: true,
   })
-  profile: string | null;
+  profile: string;
 
   @Exclude()
   @Column({
