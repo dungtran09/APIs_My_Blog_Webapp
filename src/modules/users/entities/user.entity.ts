@@ -1,5 +1,15 @@
-import { Column, DataType, Default, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  CreatedAt,
+  DataType,
+  Default,
+  HasMany,
+  Model,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
 import { Exclude } from 'class-transformer';
+import { Post } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'users' })
 class User extends Model<User> {
@@ -74,12 +84,16 @@ class User extends Model<User> {
   })
   gender: string;
 
-  // @ForeignKey(() => Address)
-  // @Column({ type: DataType.VIRTUAL })
-  // address: Address;
-  //
-  // @HasMany(() => Post, 'authorId')
-  // posts: Post[];
+  @HasMany(() => Post, 'author_id')
+  posts: Post[];
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  created_at: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updated_at: Date;
 }
 
 export default User;

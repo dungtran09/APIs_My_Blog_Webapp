@@ -1,4 +1,15 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
+import Post from './post.entity';
 
 @Table({ tableName: 'post_comments' })
 class PostComment extends Model<PostComment> {
@@ -24,14 +35,21 @@ class PostComment extends Model<PostComment> {
   })
   content: string;
 
+  @ForeignKey(() => Post)
   @Column({
     type: DataType.INTEGER.UNSIGNED,
   })
   post_id: number;
 
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-  })
-  parent_id: number;
+  @BelongsTo(() => Post, 'post_id')
+  post: Post;
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  created_at: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updated_at: Date;
 }
 export default PostComment;

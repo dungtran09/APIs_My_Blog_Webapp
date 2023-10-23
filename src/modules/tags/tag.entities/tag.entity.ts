@@ -1,4 +1,15 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  BelongsToMany,
+  Column,
+  CreatedAt,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
+import { Post, PostTag } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'tags' })
 export class Tag extends Model<Tag> {
@@ -24,4 +35,23 @@ export class Tag extends Model<Tag> {
     type: DataType.TEXT,
   })
   content: string;
+
+  @HasMany(() => PostTag, 'tag_id')
+  postTags: PostTag[];
+
+  @BelongsToMany(() => Post, {
+    through: () => PostTag,
+    foreignKey: 'tag_id',
+    otherKey: 'post_id',
+    onDelete: 'CASCADE',
+  })
+  posts: Post[];
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  created_at: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updated_at: Date;
 }

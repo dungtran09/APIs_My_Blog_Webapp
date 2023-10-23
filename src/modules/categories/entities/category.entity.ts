@@ -1,11 +1,15 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
+  CreatedAt,
   DataType,
   HasMany,
   Model,
   Table,
+  UpdatedAt,
 } from 'sequelize-typescript';
+import { Post, PostCategory } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'categories' })
 class Category extends Model<Category> {
@@ -32,16 +36,24 @@ class Category extends Model<Category> {
   })
   content: string;
 
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
+  @HasMany(() => PostCategory, 'category_id')
+  postCategories: PostCategory[];
+
+  @BelongsToMany(() => Post, {
+    through: () => PostCategory,
+    foreignKey: 'category_id',
+    otherKey: 'post_id',
+    onDelete: 'CASCADE',
   })
-  parent_id: number;
+  posts: Post[];
 
-  @BelongsTo(() => Category, { foreignKey: 'parent_id' })
-  parent: Category;
+  @CreatedAt
+  @Column(DataType.DATE)
+  created_at: Date;
 
-  @HasMany(() => Category, { foreignKey: 'parent_id' })
-  child: Category;
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updated_at: Date;
 }
 
 export default Category;
