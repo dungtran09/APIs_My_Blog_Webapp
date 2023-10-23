@@ -1,3 +1,3 @@
-import { TagModule } from './tag.module';
+import { TagsModule } from './tags.module';
 
-export { TagModule };
+export { TagsModule };

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Patch,
+  Post,
   UseGuards,
 } from '@nestjs/common';
 import { TagsService } from '../services/tag.service';
@@ -12,11 +13,11 @@ import { TagDto } from '../dtos';
 import { Tag } from '../entities';
 import { JwtAuthGuard } from 'src/modules/auth/guards';
 
-@Controller('tag')
+@Controller('tags')
 export class TagController {
   constructor(private readonly tagService: TagsService) {}
 
-  @Get()
+  @Post()
   @UseGuards(JwtAuthGuard)
   async createTag(@Body() tag: TagDto): Promise<Tag> {
     return this.tagService.createTag(tag);

@@ -1,8 +1,9 @@
 {
-  "title": "title 2",
-  "meta_title": "meta title 2",
-  "slug": "slug 2",
-  "sumary": "sumary 2",
-  "content": "content 2",
-  "published": true
+  "title": "title 3",
+  "meta_title": "meta title 3",
+  "slug": "slug 3",
+  "sumary": "sumary 3",
+  "content": "content 3",
+  "published": true,
+  "tag_ids": [1, 2, 5]
 }

@@ -1,19 +1,30 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { POST_REPOSITORY } from 'src/core/constants';
+import { POST_REPOSITORY, POST_TAG_REPOSITORY } from 'src/core/constants';
 import { Post } from '../entities';
 import { PostDto } from '../dtos';
 import { PostNotFoundException } from '../exceptions';
 import { User } from 'src/modules/users/entities';
+import { PostTag } from 'src/modules/postTags/entities';
 
 @Injectable()
 export class PostsService {
   constructor(
     @Inject(POST_REPOSITORY)
     private readonly postRepository: typeof Post,
+    @Inject(POST_TAG_REPOSITORY)
+    private readonly postTagRepository: typeof PostTag,
   ) {}
 
   async createPost(post: PostDto, author_id: number): Promise<Post> {
-    return await this.postRepository.create<Post>({ ...post, author_id });
+    const newPost = await this.postRepository.create<Post>({
+      ...post,
+      author_id,
+    });
+    if (newPost || post.tag_ids !== undefined) {
+      console.log(post.tag_ids);
+      this.createPostTags(newPost.id, post.tag_ids);
+    }
+    return newPost;
   }
 
   async getAllPosts(): Promise<Post[]> {
@@ -22,9 +33,22 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: ['password'],
+            exclude: [
+              'id',
+              'mobile',
+              'email',
+              'last_login',
+              'intro',
+              'profile',
+              'registered_at',
+              'gender',
+              'created_at',
+              'updated_at',
+              'password',
+            ],
           },
         },
+        { model: PostTag },
       ],
       attributes: { exclude: ['author_id'] },
     });
@@ -37,9 +61,22 @@ export class PostsService {
         {
           model: User,
           attributes: {
-            exclude: ['password'],
+            exclude: [
+              'id',
+              'mobile',
+              'email',
+              'last_login',
+              'intro',
+              'profile',
+              'registered_at',
+              'gender',
+              'created_at',
+              'updated_at',
+              'password',
+            ],
           },
         },
+        { model: PostTag },
       ],
       attributes: { exclude: ['author_id'] },
     });
@@ -69,5 +106,13 @@ export class PostsService {
       throw new PostNotFoundException(postId);
     }
     return updatedPost;
+  }
+
+  async createPostTags(postId: number, tagIds: Array<number>) {
+    tagIds.map(
+      async (tagId) =>
+        await this.postTagRepository.create({ post_id: postId, tag_id: tagId }),
+    );
+    return;
   }
 }

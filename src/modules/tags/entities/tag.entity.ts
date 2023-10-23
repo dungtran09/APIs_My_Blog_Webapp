@@ -8,32 +8,17 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import { Post, PostTag } from 'src/modules/posts/entities';
+import PostTag from 'src/modules/postTags/entities/postTag.entity';
+import { Post } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'tags' })
 export class Tag extends Model<Tag> {
   @Column({
-    type: DataType.STRING(75),
-    allowNull: false,
-  })
-  title: string;
-
-  @Column({
-    type: DataType.STRING(100),
-  })
-  meta_title: string;
-
-  @Column({
-    type: DataType.STRING(100),
+    type: DataType.STRING(20),
     allowNull: false,
     unique: true,
   })
-  slug: string;
-
-  @Column({
-    type: DataType.TEXT,
-  })
-  content: string;
+  name: string;
 
   @HasMany(() => PostTag, 'tag_id')
   postTags: PostTag[];

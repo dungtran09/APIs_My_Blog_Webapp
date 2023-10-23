@@ -8,7 +8,7 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import Post from './post.entity';
+import { Post } from 'src/modules/posts/entities';
 import { Tag } from 'src/modules/tags/entities';
 
 @Table({ tableName: 'post_tags' })

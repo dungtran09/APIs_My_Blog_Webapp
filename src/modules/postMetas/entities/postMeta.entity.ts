@@ -8,7 +8,7 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import Post from './post.entity';
+import { Post } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'post_metas' })
 class PostMeta extends Model<PostMeta> {

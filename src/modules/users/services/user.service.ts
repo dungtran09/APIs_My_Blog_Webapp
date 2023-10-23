@@ -3,6 +3,7 @@ import { User } from '../entities';
 import { UserDto } from '../dtos';
 import UserNotFoundException from '../exceptions/user.exception';
 import { USER_REPOSITORY } from 'src/core/constants';
+// import { Post } from 'src/modules/posts/entities';
 
 @Injectable()
 export default class UsersService {
@@ -21,6 +22,9 @@ export default class UsersService {
       attributes: {
         exclude: ['password'],
       },
+      // include: {
+      //   model: Post,
+      // },
     });
   }
 

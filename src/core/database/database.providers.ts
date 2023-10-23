@@ -1,16 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
 import { databaseConfig } from './database.config';
-import {
-  Post,
-  PostCategory,
-  PostComment,
-  PostMeta,
-  PostTag,
-} from 'src/modules/posts/entities';
+import { Post } from 'src/modules/posts/entities';
 import { Address, User } from 'src/modules/users/entities';
 import { Category } from 'src/modules/categories/entities';
 import { Tag } from 'src/modules/tags/entities';
+import { PostComment } from 'src/modules/postComments/entities';
+import { PostMeta } from 'src/modules/postMetas/entities';
+import { PostTag } from 'src/modules/postTags/entities';
+import { PostCategory } from 'src/modules/postCategories/entities';
 export const databaseProviders = [
   {
     provide: SEQUELIZE,

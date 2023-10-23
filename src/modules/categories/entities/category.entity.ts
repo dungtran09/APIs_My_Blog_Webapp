@@ -8,7 +8,8 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import { Post, PostCategory } from 'src/modules/posts/entities';
+import { PostCategory } from 'src/modules/postCategories/entities';
+import { Post } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'categories' })
 class Category extends Model<Category> {

@@ -12,12 +12,12 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import { User } from 'src/modules/users/entities';
-import PostCategory from './postCategory.entity';
 import { Category } from 'src/modules/categories/entities';
-import PostComment from './postComent.entity';
-import PostMeta from './postMeta.entity';
-import PostTag from './postTag.entity';
 import { Tag } from 'src/modules/tags/entities';
+import { PostTag } from 'src/modules/postTags/entities';
+import { PostComment } from 'src/modules/postComments/entities';
+import { PostCategory } from 'src/modules/postCategories/entities';
+import { PostMeta } from 'src/modules/postMetas/entities';
 
 @Table({ tableName: 'posts' })
 class Post extends Model<Post> {
@@ -73,6 +73,9 @@ class Post extends Model<Post> {
   @BelongsTo(() => User, 'author_id')
   author: User;
 
+  @Column({ type: DataType.ARRAY(DataType.INTEGER) })
+  tag_ids: number[];
+
   @HasMany(() => PostCategory, 'post_id')
   postCategories: PostCategory[];
 
@@ -91,7 +94,7 @@ class Post extends Model<Post> {
   metas: PostMeta[];
 
   @HasMany(() => PostTag, 'post_id')
-  postTags: PostTag[];
+  post_tags: PostTag[];
 
   @BelongsToMany(() => Tag, {
     through: () => PostTag,

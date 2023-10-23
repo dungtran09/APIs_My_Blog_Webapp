@@ -17,5 +17,8 @@ export class PostDto {
   readonly content: string;
 
   @IsNotEmpty()
+  readonly tag_ids: number[];
+
+  @IsNotEmpty()
   readonly published: boolean;
 }

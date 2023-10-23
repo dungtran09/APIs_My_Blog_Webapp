@@ -9,7 +9,7 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import { Category } from 'src/modules/categories/entities';
-import Post from './post.entity';
+import { Post } from 'src/modules/posts/entities';
 
 @Table({ tableName: 'post_categories' })
 class PostCategory extends Model<PostCategory> {
