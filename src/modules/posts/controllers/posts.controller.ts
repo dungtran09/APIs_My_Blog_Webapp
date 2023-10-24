@@ -13,15 +13,26 @@ import { Post as PostEntity } from '../entities';
 import { PostDto } from '../dtos';
 import { JwtAuthGuard } from 'src/modules/auth/guards';
 import { ReqWidthUser } from 'src/modules/auth/interfaces';
+import { PostTagsService } from 'src/modules/postTags/services';
+import { PostTag } from 'src/modules/postTags/entities';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postService: PostsService) {}
+  constructor(
+    private readonly postService: PostsService,
+    private readonly postTagsService: PostTagsService,
+  ) {}
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getAllPosts() {
+  async getAllPosts(): Promise<PostEntity[]> {
     return this.postService.getAllPosts();
+  }
+
+  @Get('/post-tags')
+  @UseGuards(JwtAuthGuard)
+  async getAllPostTags(): Promise<PostTag[]> {
+    return await this.postTagsService.getAllPostTags();
   }
 
   @Post('/')

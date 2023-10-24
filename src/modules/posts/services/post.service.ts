@@ -1,10 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { POST_REPOSITORY, POST_TAG_REPOSITORY } from 'src/core/constants';
+import {
+  POST_CATEGORY_REPOSITORY,
+  POST_REPOSITORY,
+  POST_TAG_REPOSITORY,
+} from 'src/core/constants';
 import { Post } from '../entities';
 import { PostDto } from '../dtos';
 import { PostNotFoundException } from '../exceptions';
 import { User } from 'src/modules/users/entities';
 import { PostTag } from 'src/modules/postTags/entities';
+import { Tag } from 'src/modules/tags/entities';
+import { Category } from 'src/modules/categories/entities';
+import { PostCategory } from 'src/modules/postCategories/entities';
 
 @Injectable()
 export class PostsService {
@@ -13,6 +20,8 @@ export class PostsService {
     private readonly postRepository: typeof Post,
     @Inject(POST_TAG_REPOSITORY)
     private readonly postTagRepository: typeof PostTag,
+    @Inject(POST_CATEGORY_REPOSITORY)
+    private readonly postCategory: typeof PostCategory,
   ) {}
 
   async createPost(post: PostDto, author_id: number): Promise<Post> {
@@ -20,9 +29,13 @@ export class PostsService {
       ...post,
       author_id,
     });
-    if (newPost || post.tag_ids !== undefined) {
-      console.log(post.tag_ids);
-      this.createPostTags(newPost.id, post.tag_ids);
+
+    if (newPost && post.tag_ids !== null) {
+      await this.createPostTags(newPost.id, post.tag_ids);
+    }
+
+    if (newPost && post.categories_ids !== null) {
+      await this.createPostCategories(newPost.id, post.categories_ids);
     }
     return newPost;
   }
@@ -48,9 +61,17 @@ export class PostsService {
             ],
           },
         },
-        { model: PostTag },
+        {
+          model: Tag,
+          attributes: {
+            exclude: ['created_at', 'updated_at', 'PostTag'],
+          },
+        },
+        {
+          model: Category,
+        },
       ],
-      attributes: { exclude: ['author_id'] },
+      attributes: { exclude: ['author_id', 'tag_ids'] },
     });
   }
 
@@ -73,12 +94,21 @@ export class PostsService {
               'created_at',
               'updated_at',
               'password',
+              'tag_ids',
             ],
           },
         },
-        { model: PostTag },
+        {
+          model: Tag,
+          attributes: {
+            exclude: ['created_at', 'updated_at', 'PostTag'],
+          },
+        },
+        {
+          model: Category,
+        },
       ],
-      attributes: { exclude: ['author_id'] },
+      attributes: { exclude: ['author_id', 'tag_ids'] },
     });
 
     if (post) {
@@ -112,6 +142,19 @@ export class PostsService {
     tagIds.map(
       async (tagId) =>
         await this.postTagRepository.create({ post_id: postId, tag_id: tagId }),
+    );
+    return;
+  }
+
+  async createPostCategories(postId: number, categoriesIds: Array<number>) {
+    console.log(categoriesIds);
+
+    categoriesIds.map(
+      async (categoryId) =>
+        await this.postCategory.create({
+          post_id: postId,
+          category_id: categoryId,
+        }),
     );
     return;
   }

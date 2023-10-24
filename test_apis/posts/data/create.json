@@ -1,9 +1,10 @@
 {
-  "title": "title 3",
-  "meta_title": "meta title 3",
-  "slug": "slug 3",
-  "sumary": "sumary 3",
-  "content": "content 3",
+  "title": "title 1",
+  "meta_title": "meta title 1",
+  "slug": "slug 1",
+  "sumary": "sumary 1",
+  "content": "content 1",
   "published": true,
+  "categories_ids": [2],
   "tag_ids": [1, 2, 5]
 }

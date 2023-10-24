@@ -16,7 +16,8 @@ export class PostDto {
   @IsNotEmpty()
   readonly content: string;
 
-  @IsNotEmpty()
+  readonly categories_ids: number[];
+
   readonly tag_ids: number[];
 
   @IsNotEmpty()

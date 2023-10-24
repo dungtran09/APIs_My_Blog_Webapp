@@ -73,11 +73,14 @@ class Post extends Model<Post> {
   @BelongsTo(() => User, 'author_id')
   author: User;
 
-  @Column({ type: DataType.ARRAY(DataType.INTEGER) })
+  @Column({ type: DataType.ARRAY(DataType.INTEGER), allowNull: true })
   tag_ids: number[];
 
+  @Column({ type: DataType.ARRAY(DataType.INTEGER), allowNull: true })
+  categories_ids: number[];
+
   @HasMany(() => PostCategory, 'post_id')
-  postCategories: PostCategory[];
+  post_categories: PostCategory[];
 
   @BelongsToMany(() => Category, {
     through: () => PostCategory,

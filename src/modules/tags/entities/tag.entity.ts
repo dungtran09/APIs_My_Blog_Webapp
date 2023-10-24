@@ -21,7 +21,7 @@ export class Tag extends Model<Tag> {
   name: string;
 
   @HasMany(() => PostTag, 'tag_id')
-  postTags: PostTag[];
+  post_tags: PostTag[];
 
   @BelongsToMany(() => Post, {
     through: () => PostTag,
